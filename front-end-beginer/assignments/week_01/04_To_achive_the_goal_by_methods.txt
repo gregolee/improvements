@@ -1,0 +1,7 @@
+1. javascript30 학습
+
+2. Vue.js and react 다룰 줄 알기
+
+3. python and R
+
+4. Identity Management & Access Management 학습
