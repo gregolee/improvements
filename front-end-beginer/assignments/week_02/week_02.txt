@@ -1,0 +1,98 @@
+1. https://www.bsidesoft.com/?p=4074 에서 값, 식, 문 정리하기
+    1.1. 시작하며...
+        - 단어를 정복하라는 언급은 '개발'에만 국한되지 않는다고 생각함.
+        - 일반적으로 쓰는 단어와 그 분야에서 사용하는 단어의 뜻이 다름.
+        - 특정 분야에서 사용하는 단어의 의미를 알면 그에 대한 지식을 얻는 것임.
+
+    1.2. Lexical Grammer
+        ; 구체적인 문법을 정의하기 이전에 그 문법을 구성하는 기본 요소들을 정의해 준 것.
+
+        1.2.1. javascript
+            - Control Characters (제어문자) : 눈에 보이지 않지만 여러가지 제어를 위해 삽입되는 문자.
+            - White Space (공백) : 띄어쓰기를 컴퓨터가 인식하게 하는 문자.
+            - Line terminators (줄바꿈) : 컴퓨터가 줄바꿈을 인식할 수 있게하는 문자.
+            - Comments (주석) : 번역기가 코드를 low level 언어로 해석하지 않는 부분
+            - Keywords (키워드) : 예약어, 약속어를 칭함. 해석기가 만나면 키워드에 미리 지정된 방식으로 내용을 인식한다.
+            - Literal (리터럴) : 더 이상 나눌 수 없는 값을 표현.  ex) 3, '3' 등
+
+    1.3. Statement & Expression
+        1.3.1. Statement (문)
+            - 인터프리터에게 내리는 '지시명령'. 어떤 동작을 해야되는지 keyword를 통해 알게된다.
+            - Expression은 값으로 수렴하기 때문에 return할 수 있지만 Statement는 파싱된 이후 아무것도 남지 않기에 return 할 수 없다.
+            - '지시명령'의 구조
+                - 구조물 생성하는 명령 
+                    ***javascript는 구조물을 생성하는 명령이 존재하지 않음.
+                       참조 : http://www.bsidesoft.com/?cat=21
+                - 흐름제어 명령
+                    - 제어문(control statement), routine(반복문)
+                        //제어문(프로그램의 흐름을 바꾸는 제어문. 종류 엄청많음)
+                        if(...){...} if else(...){....},
+                        switch(...){..}
+                        for(...){...}
+                        ...
+
+            - '지시명령'의 형태
+                - empty statement : 공문(빈문)
+                    //공문
+                    ;;;;;;; //아무것도 없는 공문들의 집합...
+                    while(...); //while에 공문
+
+                - block statement : 중문({}) 
+                    //단문(1개짜리 문)
+                    var ... = ..;
+
+                    //중문(=단문 여러개를 {}로 묶은것)
+                    if(...){
+                        문1;
+                        문2;
+                    }
+
+                - expression statement : 식문
+                    //식문(값인 것 같지만, 자바스크립트는 식문이라고 해서 문으로 인정함)
+                    3+3;
+                    'aaa';
+
+                - (variable) declare statement : (변수)선언문
+                    //변수 선언문
+                    var i;
+                    let es6let; //ES6 문법
+                    const es6const = 3; //ES6 문법
+        1.3.2. Expression (식, 표현식)
+            - 어떠한 값을 갖는(수렴하는) 것을 말함
+                ***값은 primitive, reference로 나뉜다.
+            - Statement와 다르게 return 할 수 있다.
+
+            - Expression 의 형태
+                - 값 식 : 값 자체도 식으로 인정. 다음과 같은 코드는 전부 올바른 값 식
+                    3 //숫자 ok!
+                    'test' //문자 ok!
+                    {a:3} //객체 ok!
+                    undefined //undefined ok!
+                    null //null ok!
+
+                - 연산식 : 연산자가 포함된 경우 결과는 반드시 하나의 값이 되어 최종적으로 값 식.
+                    1+3 //4 값 수렴 ok!
+                    5 > 3 // true 값  수렴 ok!
+                    
+                - 리터럴 : 리터럴은 대부분 객체 생성을 위한 일종의 매크로. 리터럴의 결과는 참조값.
+                    {} //오브젝트리터럴
+                    function(){} //함수리터럴
+                    [] //배열리터럴
+                    /abc/ //정규식리터럴
+
+                - 함수호출 : 함수를 호출한 결과는 값. 자바는 void를 반환하면 값이 될 수 없습니다만 자바스크립트는 명시적으로 반환하지 않아도 undefined 가 반환되어 언제나 값으로 수렴.
+            
+            - Expression 연관 주제
+                - 기본값과 래퍼객체
+                    var a = "test"; //기본값으로 작동!
+                    alert( typeof a ); // 'string'
+ 
+                    var b = new String( "test" ); //참조값으로 작동!
+                    alert( typeof b ); //'object'
+
+                - 참조값과 가비지컬렉팅
+                    ***참조 : https://www.bsidesoft.com/?p=760
+                    
+                - 연산자, 연산지연
+                    ***참조(연산자) : https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_Operators
+                    ***참조(연산지연) : https://www.bsidesoft.com/?p=773
