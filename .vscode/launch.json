@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/front-end-beginer/assignments/week_02/hotel-app.js"
+            "program": "${workspaceFolder}/front-end-beginer/assignments/week_02/counter-app.js"
         }
     ]
 }
