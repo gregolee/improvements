@@ -3,11 +3,11 @@ const Counter = {
     getCount : function() {
         return this.count;
     },
-    increment : function(num) {
-        this.calculate(num || 1);
+    increment : function(num = 1) {
+        this.calculate(num);
     },
-    decrement : function(num) {
-        this.calculate((num && -1*num) || -1);
+    decrement : function(num = 1) {
+        this.calculate(-1*num);
     },
     calculate : function(num) {
         this.count += num;
