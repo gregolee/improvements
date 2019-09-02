@@ -4,13 +4,10 @@ const Counter = {
         return this.count;
     },
     increment : function(num = 1) {
-        this.calculate(num);
+        this.count += num;
     },
     decrement : function(num = 1) {
-        this.calculate(-1*num);
-    },
-    calculate : function(num) {
-        this.count += num;
+        this.count -= num;
     },
 }
 console.log(Counter.getCount()); // 0
