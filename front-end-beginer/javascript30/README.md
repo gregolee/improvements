@@ -40,16 +40,16 @@
 
 #04-Array Cardio Day 1
 1. Array 내 prototype 함수 중 유용한 것들이 다음과 같이 있다.
-    1.1. Array.prototype.filter()
+    - 1.1. Array.prototype.filter()
         ; 해당 배열을 순회하면서 필터링을 한 값을 return해준다. true를 return하면 해당 element가 담긴 배열을 return 한다.
-    1.2. Array.prototype.map()
+    - 1.2. Array.prototype.map()
         ; 해당 배열을 순회하면서 가공된 값이 담긴 배열을 return한다.
-    1.3. Array.prototype.sort()
+    - 1.3. Array.prototype.sort()
         ; 해당 배열을 순회하면서 오름차순, 내림차순으로 정렬한다.
-    1.4. Array.prototype.reduce()
+    - 1.4. Array.prototype.reduce()
         ; map()의 경우 element마다 가공된 값을 배열으로 return했다면, reduce()의 경우는 customizing하게 가공한 값을 전달할 수 있다.
-        - map() :: element만 가공하여 배열에 담는다. 순회하면서 정리된 누적값, 이전 element와의 비교는 할 수 없다.
-        - reduce() :: map()보다 포괄적인 return이 가능하다. 순회하면서 return된 값을 토대로 편집이 가능하다. 이를 위해서는 반드시 return하는 값의 datatype을 일치해줘야 한다.
+        -- map() :: element만 가공하여 배열에 담는다. 순회하면서 정리된 누적값, 이전 element와의 비교는 할 수 없다.
+        -- reduce() :: map()보다 포괄적인 return이 가능하다. 순회하면서 return된 값을 토대로 편집이 가능하다. 이를 위해서는 반드시 return하는 값의 datatype을 일치해줘야 한다.
 
 2. 1번에서 설명한 함수들을 활용하기 위해서는 datatype이 Array로 변경되어야 사용할 수 있다.
     - const links = category.querySelectorAll('a');     //datatype이 nodeList로서 map()이 prototype에 들어 있지 않음. 이에 따라 Array로 변경해줘야 함.
