@@ -22,3 +22,46 @@
     - hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 3. setInterval(function(){}, microSeconds);
     - 자주 활용되는 문구이기는하나, 과거 무거운 function은 활용했다가 browser가 뻗어버리는 경우가 있었다. 조심히 활용토록 하자.
+
+#03-Playing with CSS vatiables and JS
+1. css의 변수(variable)을 관리가 가능.
+    - document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+      ; 위와 같은 형식으로 해당 변수를 수정이 가능하게끔 해두었다. 상세한 컨트롤 방법은 css에 대한 학습이 필요한 것으로 생각된다.
+2. EventListener
+    - change : 값이 변경된 후를 감지함. 드래그하는 동안의 값의 변경은 감지하지 않음
+    - mousemove : 마우스가 이동하는 것음 감지한다. 추후 강의에서 함수를 추가하게 되는데, 모든 움직임을 감지하기 때문에 리소스를 줄여주기 위한 함수를 추가해야 한다.
+3. input의 type
+    - range : 값의 범위를 드래그하여 사용한다.
+    - color : 색을 지정할 수 있는 타입.
+4. html tag 내 data 관리
+    - tag 내 'data-'라는 접두어를 붙여서 데이터를 관리할 수 있다.
+    - const suffix = this.dataset.sizing || '';
+        ; this는 해당 tag의 인스턴스를 뜻하며, dataset을 호출하면 해당 인스턴스의 모든 'data-'로 나타낸 것들을 객체형태로 호출할 수 있다.
+
+#04-Array Cardio Day 1
+1. Array 내 prototype 함수 중 유용한 것들이 다음과 같이 있다.
+    1.1. Array.prototype.filter()
+        ; 해당 배열을 순회하면서 필터링을 한 값을 return해준다. true를 return하면 해당 element가 담긴 배열을 return 한다.
+    1.2. Array.prototype.map()
+        ; 해당 배열을 순회하면서 가공된 값이 담긴 배열을 return한다.
+    1.3. Array.prototype.sort()
+        ; 해당 배열을 순회하면서 오름차순, 내림차순으로 정렬한다.
+    1.4. Array.prototype.reduce()
+        ; map()의 경우 element마다 가공된 값을 배열으로 return했다면, reduce()의 경우는 customizing하게 가공한 값을 전달할 수 있다.
+        - map() :: element만 가공하여 배열에 담는다. 순회하면서 정리된 누적값, 이전 element와의 비교는 할 수 없다.
+        - reduce() :: map()보다 포괄적인 return이 가능하다. 순회하면서 return된 값을 토대로 편집이 가능하다. 이를 위해서는 반드시 return하는 값의 datatype을 일치해줘야 한다.
+
+2. 1번에서 설명한 함수들을 활용하기 위해서는 datatype이 Array로 변경되어야 사용할 수 있다.
+    - const links = category.querySelectorAll('a');     //datatype이 nodeList로서 map()이 prototype에 들어 있지 않음. 이에 따라 Array로 변경해줘야 함.
+    - const links = Array.from(category.querySelectorAll('a'));   //ES6 이전
+    - const links = [...category.querySelectorAll('a')];   //ES6
+
+3. 1번의 함수들은 java에서는 stream으로 검색하면 활용이 가능하다.
+    - java에서는 datatype에 대한 조건이 까다로워서, javascript처럼 동일하게 사용할 수는 없다.
+
+4. 1번의 함수들은 과거 for문(statement)보다 훨씬 빠른 순회가 가능하다.
+    - java의 stream에서 해당 내용을 정리할 예정.
+
+5. 배열을 리턴하는 일부 함수의 경우 다음과 같이 활용이 가능하다.
+    - const parts = lastOne.split(', ');          //이와 같이 하면 코드가 지저분해지기 쉽다. 불필요하게 길어지는 경우가 존재한다.
+    - const [aLast, aFirst] = lastOne.split(', ');  //현재와 같이 사용하면 간결하고 명시적으로 활용이 가능하다.
