@@ -65,3 +65,30 @@
 5. 배열을 리턴하는 일부 함수의 경우 다음과 같이 활용이 가능하다.
     - const parts = lastOne.split(', ');          //이와 같이 하면 코드가 지저분해지기 쉽다. 불필요하게 길어지는 경우가 존재한다.
     - const [aLast, aFirst] = lastOne.split(', ');  //현재와 같이 사용하면 간결하고 명시적으로 활용이 가능하다.
+
+#05-Flex-Panels-Image-Gallery
+1. CSS에 대한 이해가 많이 필요하다...
+    - .panels { display: flex; } : 해당 tag의 하위 html tag들을 flex로 보여주는 역할을 한다. default로 가로로 배열을 보여주게끔한다.
+    - .panel {
+        flex: 1;     : 가로로 정렬된 패널이 각 1:1:1:1:1의 비율로 정돈하게끔 해준다. 이 값이 없으면 화면이 조정됨에 따른 유동적인 변화가 이뤄지지 않는다.
+        justify-content: center;        : https://css-tricks.com/almanac/properties/j/justify-content/
+        align-items: center;        : https://css-tricks.com/almanac/properties/a/align-items/
+        display: flex;      : flex 활용
+        flex-direction: column;     : flex가 정렬되는 방향
+      }
+    - .panel > * {             : 하위의 자식 노드를 모두 선택. 자식의 자식까지 해당하지는 않는다.
+        border: 1px solid red;
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    -   .panel > *:first-child { transform: translateY(-100%); }
+        .panel.open-active > *:first-child { transform: translateY(0); }
+        .panel > *:last-child { transform: translateY(100%); }
+        .panel.open-active > *:last-child { transform: translateY(0); }
+        ; first-child, last-child - css에서 자식노드 중 선택할 수 있는 예약어로 추측된다.
+
+2. this.classList.toggle('open-active');
+    - classList : class를 List로 반환
+    - toggle('open-active') : 켰다, 껐다하는 on/off 스위치처럼 'open-active'라는 class가 없으면 추가하고, 존재하면 없앤다.
