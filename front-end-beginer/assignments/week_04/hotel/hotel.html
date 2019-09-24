@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hotel</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  </head>
+  <body>
+    <div id="app">
+      <v-app>
+        <v-content class="backimage">
+          <v-layout
+            align-center
+            column
+            justify-end
+            pa-4
+          >
+            <h2 class="headline">{{ message.welcome }}</h2>
+          </v-layout>
+          <v-snackbar
+          v-model="snackbar"
+          :multi-line="multiLine"
+          >
+            {{ showMsg }}
+            <v-btn
+              color="red"
+              text
+              @click="snackbar = false"
+            >
+              Close
+            </v-btn>
+          </v-snackbar>
+          <div class="text-center">
+            <v-btn @click="getStatus"><v-icon>people</v-icon>&nbsp;체크인 고객 확인</v-btn>
+          </div>
+          <v-layout
+            align-center
+            column
+            justify-end
+            pa-4
+          >
+            <v-flex xs6>
+              <v-text-field
+                solo
+                label="Check In"
+                @keypress.enter="checkIn"
+                prepend-inner-icon="how_to_reg"
+                clearable
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs6>
+              <v-text-field
+                solo
+                label="Check Out"
+                @keypress.enter="checkOut"
+                prepend-inner-icon="directions_run"
+                clearable
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs12>
+              <v-combobox
+                solo
+                v-model="hotel.customers"
+                :items="hotel.customers"
+                label="Customers"
+                prepend-inner-icon="people"
+                multiple
+                chips
+              ></v-combobox>
+            </v-flex>
+          </v-layout>
+        </v-content>
+      </v-app>
+    </div>
+  </body>
+</html>
+
+<style>
+.backimage {
+  background-size: cover;
+  background-image: url("./hotel.jpg");
+  background-repeat: no-repeat;
+}
+.content {
+  padding: 30px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #ffffff;
+  background-color: rgba( 255, 255, 255, 0.5 );
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script>
+function Hotel() {
+  this.customers = [];
+  this.getStatus = function () {
+    let msg = '';
+    this.customers.forEach(function (item, index, array) {
+        msg += item + '님, ';
+    });
+    return (msg === '' && '체크인한 고객이 없습니다.') || msg.substr(0, msg.length-2) + '이 체크인했습니다.';
+  }
+  this.checkIn = function (name) {
+    //잘못된 값, 빈값에 대한 검증
+    let msg = (name !== '' && typeof name === 'string' && name) 
+            || (name === '' && '고객님의 성함이 입력되지 않았습니다.')
+            || (typeof name !== 'String' && name + '은 문자열이 아닙니다.')
+            || '알 수 없는 오류입니다. 관리자에게 문의하세요.';
+    //중복 이름에 대한 체크
+    this.customers.forEach(function (item, index, array) {
+        msg = (item===name && '이미 '+name+'님은 체크인 하셨습니다.') || msg;
+    });
+    //체크인
+    if (msg===name) this.customers.push(name);
+    //return
+    return (msg===name && '안녕하세요. '+name+'님 반갑습니다.') || msg;
+  }
+  this.checkOut = function (name) {
+    //인원, 잘못된 값, 빈값에 대한 검증
+    let msg = (name !== '' && typeof name === 'string' && name) 
+            || (name === '' && '고객님의 성함이 입력되지 않았습니다.')
+            || (typeof name !== 'String' && name + '은 문자열이 아닙니다.')
+            || '알 수 없는 오류입니다. 관리자에게 문의하세요.';
+    //체크아웃 및 없는인원 검증
+    for (let i=0; i<this.customers.length && msg===name; i++) {
+        msg = (this.customers[i]===name && this.customers.splice(i, 1)[0] + '님 감사합니다. 안녕히 가세요.')
+            || msg;
+    }
+    msg = (msg===name && name + '님은 체크인 명단에 없습니다.') || msg;
+
+    //return
+    return msg;
+  }
+}
+
+let app = new Vue({
+  el: '#app',
+  vuetify: new Vuetify(),
+  data: {
+    message: {
+      welcome: '안녕하세요. 부다페스트 호텔에 오신 것을 환영합니다.'
+    },
+    showMsg: '',
+    multiLine: true,
+    snackbar: false,
+    hotel: {}
+  },
+  methods: {
+    getStatus: function() {
+      this.snackbar = false
+      this.showMsg = this.hotel.getStatus()
+      this.snackbar = true
+    },
+    checkIn: function(event) {
+      this.snackbar = false
+      this.showMsg = this.hotel.checkIn(event.target.value)
+      event.target.value = '';
+      this.snackbar = true
+    },
+    checkOut: function(event) {
+      this.snackbar = false
+      this.showMsg = this.hotel.checkOut(event.target.value)
+      event.target.value = '';
+      this.snackbar = true
+    }
+  },
+  created: function() {
+    this.hotel = new Hotel()
+  }
+});
+</script>
