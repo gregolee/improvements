@@ -92,3 +92,16 @@
 2. this.classList.toggle('open-active');
     - classList : class를 List로 반환
     - toggle('open-active') : 켰다, 껐다하는 on/off 스위치처럼 'open-active'라는 class가 없으면 추가하고, 존재하면 없앤다.
+
+#06-Ajax Type Ahead
+1. fetch API
+    - Request나 Response와 같은 HTTP의 파이프라인을 구성하는 요소를 조작하는것이 가능
+    - fetch() 메서드를 이용하는 것으로 비동기 네트워크 통신을 알기쉽게 기술할 수 있음
+    - 상세 내용은 다음을 참조 : https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Fetch%EC%9D%98_%EC%82%AC%EC%9A%A9%EB%B2%95
+
+2. fetch API보다 axios가 더 많은 기능을 제공하므로 이런 기능이 javascript 기본 기능에 제공한다는 것을 기억해두자.
+    - axios를 활용하지 못하는 환경이라면 해당 api를 활용할 수도 있을 것이다.
+
+3. ES6 문법
+    - cities.push(data) : cities[?] 인 인덱스에 1000개의 배열데이터를 집어 넣는다.
+    - cities.push(...data) : [ES6] cities의 n ~ n+999 마다 데이터를 push한다.
