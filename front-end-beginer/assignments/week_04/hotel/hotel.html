@@ -71,22 +71,28 @@
 <script>
     class Hotel {
         constructor() {
+            const _self = this;
             this.customers = [];
+            this.messages = {
+                required: v => '고객님의 성함이 입력되지 않았습니다.',
+                chkString: v => `${v} 값은 문자열이 아닙니다.`,
+                dupCheckIn: v => `이미 ${v}님은 체크인 하셨습니다.`,
+                alreadyCheckOut: v => `${v}님은 체크인 명단에 없습니다.`
+            };
             this.rules = {
-                required: v => (v !== null && v !== '') ? true : '고객님의 성함이 입력되지 않았습니다.',
-                chkString: v => typeof v === 'string' ? true : `${v} 값은 문자열이 아닙니다.`,
+                required: v => (v !== null && v !== '') ? true : _self.messages.required(v),
+                chkString: v => typeof v === 'string' ? true : _self.messages.chkString(v),
                 chkCheckIn: (v, customers) => {
                     const cnt = customers
                         .filter(customer => customer === v ? true : false)
                         .length
-                    console.log(cnt)
-                    return cnt ? `이미 ${v}}님은 체크인 하셨습니다.` : true
+                    return cnt ? _self.messages.dupCheckIn(v) : true
                 },
                 chkCheckOut: (v, customers) => {
                     const cnt = customers
                         .filter(customer => customer === v ? true : false)
                         .length
-                    return cnt ? true : `${v}님은 체크인 명단에 없습니다.`
+                    return cnt ? true : _self.messages.alreadyCheckOut(v)
                 }
             };
         }
