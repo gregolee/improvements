@@ -105,3 +105,17 @@
 3. ES6 문법
     - cities.push(data) : cities[?] 인 인덱스에 1000개의 배열데이터를 집어 넣는다.
     - cities.push(...data) : [ES6] cities의 n ~ n+999 마다 데이터를 push한다.
+
+#07-Array_Cardio_Day2
+1. Array.prototype.some()
+    - Array 중 작성한 function의 하나라도 true로 리턴되면, 결과값으로 true를 리턴한다.
+
+2. Array.prototype.every()
+    - Array 중 모든 index의 값이 전부 true가 되어야만, 결과값으로 true를 리턴한다.
+
+3. Array.prototype.find()
+    - 조건에 부합하는 value를 리턴한다.
+    - 배열을 모두 순회하여 조건에 부합하는 모든 것을 찾아주는 것이 아닌, 0으로부터 가장 가까운 위치에 존재하는 value를 리턴한다.
+
+4. Array.prototype.findIndex()
+    - 3번과 동일한 로직이나 이 매서드는 인덱스를 리턴한다.
