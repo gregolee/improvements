@@ -13,23 +13,55 @@
 <body>
     <div id="app">
         <v-app>
-            <v-content class="backimage">
+            <v-content>
                 <v-layout align-center column justify-end pa-4>
-                    <h2 class="headline">{{ message.welcome }}</h2>
+                    <h2 class="headline">{{ fishBread.message.welcome }}</h2>
+                    <br>
+                    <subheader>{{ fishBread.message.beforeBake(fishBread.shape, fishBread.getCrunchy(), fishBread.flavor) }}</subheader>
+                    <v-btn @click="fishBread.result = fishBread.bake()">
+                        {{ fishBread.message.pleaseBake }}
+                    </v-btn>
+                </v-layout>
+                <v-layout align-center column justify-center pa-4>
+                    <v-card
+                        class="d-inline-flex justify-center pa-6"
+                        flat
+                        tile
+                    >
+                        <v-color-picker
+                            v-model="fishBread.color"
+                            class="ma-3" 
+                            mode.sync="hexa"
+                            hide-inputs
+                            label="Color"
+                        ></v-color-picker>
+                        <v-layout align-begin column>
+                            <v-slider
+                                v-model="fishBread.temperature"
+                                max="200"
+                                min="50"
+                                color="red"
+                                track-color="yellow"
+                                thumb-label="always"
+                                label="Temperature"
+                            ></v-slider>
+                            <v-autocomplete
+                                v-model="fishBread.shape"
+                                :items="fishBread._shapes"
+                                label="shape"
+                            >
+                            </v-autocomplete>
+                            <v-autocomplete
+                                v-model="fishBread.flavor"
+                                :items="fishBread._flavor"
+                                label="flavor"
+                            >
+                            </v-autocomplete>
+                        </v-layout>
+                    </v-card>
                 </v-layout>
                 <v-layout align-center column justify-end pa-4>
-                    <v-text-field type="number" v-model="interval" label="Interval" outlined></v-text-field>
-                    <div class="text-center">
-                        <v-btn @click="counter.decrement(interval)">
-                            <v-icon>arrow_back</v-icon>&nbsp;Decrease
-                        </v-btn>
-                        <v-btn @click="counter.increment(interval)">
-                            <v-icon>arrow_forward</v-icon>&nbsp;Increase
-                        </v-btn>
-                    </div>
-                </v-layout>
-                <v-layout align-center column justify-end pa-4>
-                    <v-text-field type="number" v-model="counter.count" label="Count" outlined readonly></v-text-field>
+                    <h1 class="bread">{{ fishBread.result }}</h1>
                 </v-layout>
             </v-content>
         </v-app>
@@ -43,53 +75,67 @@
 <script>
 
 class FishBread {
-    constructor(shape='triangle', color='brown', tempo=65, taste='redbean') {
-        
-    }
-}
+    constructor(shape='Heart', color='#FFBD00', temperature=100, flavor='Sweet Red Bean') {
+        this._shapes = ['Circle', 'Triangle', 'Heart', 'Cloud'];
+        this._flavor = ['Sweet Red Bean', 'Pizza', 'Vegitable', 'Cheeze'];
+        this._shapeIcon = {
+            Circle: 'lens',
+            Triangle: 'change_history',
+            Heart: 'favorite',
+            Cloud: 'wb_cloudy'
+        };
+        this._crunchy = {
+            r: 'RARE',
+            mr: 'MEDIUM RARE',
+            m: 'Medium',
+            mw: 'MEDIUM WELL',
+            w: 'WELL DONE'
+        };
+        this.message = {
+            welcome: '안녕하세요. Javascript FishBread Shop 입니다.',
+            beforeBake: (s, c, f) => `${s} 모양, ${c} 굽기인 ${f}맛일 것 같아요!`,
+            takeOrder: `주문해주세요.`,
+            isOkay: '이대로 빵을 만들까요?',
+            bakeComplete: result => `${result}빵이 완성되었습니다. 맛있게 드세요!`,
+            pleaseBake: '구워주세요!!'
+        };
 
-     const Bread = function(shape='triangle', color='brown', tempo=65, taste='redBean') {
         this.shape = shape;
         this.color = color;
-        this.tempo = tempo;
-        this.taste = taste;
-        this.cost = 1000;
+        this.temperature = temperature;
+        this.flavor = flavor;
+        this.result = '';
     }
-        
-    Bread.prototype.crunchy = {
-        rare: 'RARE',
-        mediumRare: 'MEDIUM RARE',
-        medium: 'Medium',
-        mediumWell: 'MEDIUM WELL',
-        wellDone: 'wellDone'
+    getCrunchy() {
+        const crunchyValue = this.temperature<100 && 'r'
+                ||  this.temperature<120 && 'mr'
+                ||  this.temperature<140 && 'm'
+                ||  this.temperature<160 && 'mw'
+                ||  'w';
+        return this._crunchy[crunchyValue];
     }
-    Bread.prototype.getCrunchy = function() {
-        const crunchyValue = this.tempo<50 && 'rare'
-                ||  this.tempo<60 && 'midiumRare'
-                ||  this.tempo<70 && 'medium'
-                ||  this.tempo<80 && 'mediumWell'
-                ||  'wellDone';
-        return this.crunchy[crunchyValue];
-    };
-    Bread.prototype.getTaste = function() {
-        return this.taste;
-    };
-    Bread.prototype.bake = function() {
-        return `Here is ${this.getCrunchy()} taste fishbread!!!`;
+    getFlavor() {
+        return this.flavor;
     }
-
+    bake() {
+        const isBake = confirm(this.message.isOkay)
+        const result = !isBake ? '' : `<font color="${this.color}"><i class="material-icons">${this._shapeIcon[this.shape]}</i> ${this.flavor}, ${this.getCrunchy()} </font>`;
+        const h1 = document.querySelector('.bread');
+        console.log(h1);
+        h1.innerHTML = result;
+    }
+}
+    /*
+    */
     let app = new Vue({
         el: '#app',
         vuetify: new Vuetify(),
         data: {
-            message: {
-                welcome: '안녕하세요. Counter-App Service 입니다.'
-            },
-            counter: {},
-            interval: 1
+            fishBread: {},
+            showMsg: ''
         },
         created: function() {
-            this.counter = new Counter()
+            this.fishBread = new FishBread()
         }
     });
 </script>
