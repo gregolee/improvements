@@ -12,6 +12,7 @@
     - 백틱 내 `abcde ${variable}` ${}의 위치에 소스코드를 대입하여 넣을 수 있다.
     - '=>' arrow function은 다소 익숙해질 필요가 있어보인다.
 
+
 #02-CSS+JS_Clock
 1. css에서 애니메이션을 담당하는 transition, 형태를 변하게 하는 transform을 활용
     - transform-origin: 100%; /*default : 0%, -?% ~ ?%, 중앙지점을 기준으로 모양을 변하게 한다.*/
@@ -22,6 +23,7 @@
     - hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 3. setInterval(function(){}, microSeconds);
     - 자주 활용되는 문구이기는하나, 과거 무거운 function은 활용했다가 browser가 뻗어버리는 경우가 있었다. 조심히 활용토록 하자.
+
 
 #03-Playing with CSS vatiables and JS
 1. css의 변수(variable)을 관리가 가능.
@@ -37,6 +39,7 @@
     - tag 내 'data-'라는 접두어를 붙여서 데이터를 관리할 수 있다.
     - const suffix = this.dataset.sizing || '';
         ; this는 해당 tag의 인스턴스를 뜻하며, dataset을 호출하면 해당 인스턴스의 모든 'data-'로 나타낸 것들을 객체형태로 호출할 수 있다.
+
 
 #04-Array Cardio Day 1
 1. Array 내 prototype 함수 중 유용한 것들이 다음과 같이 있다.
@@ -66,6 +69,7 @@
     - const parts = lastOne.split(', ');          //이와 같이 하면 코드가 지저분해지기 쉽다. 불필요하게 길어지는 경우가 존재한다.
     - const [aLast, aFirst] = lastOne.split(', ');  //현재와 같이 사용하면 간결하고 명시적으로 활용이 가능하다.
 
+
 #05-Flex-Panels-Image-Gallery
 1. CSS에 대한 이해가 많이 필요하다...
     - .panels { display: flex; } : 해당 tag의 하위 html tag들을 flex로 보여주는 역할을 한다. default로 가로로 배열을 보여주게끔한다.
@@ -93,6 +97,7 @@
     - classList : class를 List로 반환
     - toggle('open-active') : 켰다, 껐다하는 on/off 스위치처럼 'open-active'라는 class가 없으면 추가하고, 존재하면 없앤다.
 
+
 #06-Ajax Type Ahead
 1. fetch API
     - Request나 Response와 같은 HTTP의 파이프라인을 구성하는 요소를 조작하는것이 가능
@@ -105,6 +110,7 @@
 3. ES6 문법
     - cities.push(data) : cities[?] 인 인덱스에 1000개의 배열데이터를 집어 넣는다.
     - cities.push(...data) : [ES6] cities의 n ~ n+999 마다 데이터를 push한다.
+
 
 #07-Array_Cardio_Day2
 1. Array.prototype.some()
@@ -119,3 +125,14 @@
 
 4. Array.prototype.findIndex()
     - 3번과 동일한 로직이나 이 매서드는 인덱스를 리턴한다.
+
+#08-Fun with HTML5 Canvas
+1. addEventListener({eventName}, {Function})
+    - mousedown : 마우스 클릭시 이벤트 발생
+    - mousemove : 마우스 이동시 이벤트 발생
+    - mouseup : 마우스 클릭 후 떼었을때
+    - mouseout : 마우스가 해당 브라우저를 벗어나면 발생
+2. Event
+    - e.offsetX, e.offsetY : 이벤트가 발생한 위치의 좌표
+3. Canvas
+    - 선을 그리는 다양한 방법이 존재함. 예제는 해당 소스를 참조하여 확인하는 것이 나음
