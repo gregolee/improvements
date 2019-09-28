@@ -24,7 +24,7 @@ CounterConstructor.prototype.getCount = function() {
 CounterConstructor.prototype.increment = function(num) {
     this.count += num*1
 }
-CounterConstructor.prototype.decrement = function() {
+CounterConstructor.prototype.decrement = function(num) {
     this.count += num*-1
 }
 
