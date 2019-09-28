@@ -14,7 +14,7 @@ const CounterLiteral = {
 
 
 // 2. Constructor (lagacy) : 모든 javacript 버전에서 사용가능
-const CounterConstructor = function (num) {
+const CounterConstructor = function ({ num }) {
     this.count = num;
 }
 
@@ -31,7 +31,7 @@ CounterConstructor.prototype.decrement = function(num) {
 
 // 3. Class (Modern / ES2015+ === ES6)
 class CounterClass {
-    constructor(number) {
+    constructor({number}) {
         const _self = this;
         this.count = number;
     }
