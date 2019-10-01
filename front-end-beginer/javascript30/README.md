@@ -126,6 +126,7 @@
 4. Array.prototype.findIndex()
     - 3번과 동일한 로직이나 이 매서드는 인덱스를 리턴한다.
 
+
 #08-Fun with HTML5 Canvas
 1. addEventListener({eventName}, {Function})
     - mousedown : 마우스 클릭시 이벤트 발생
@@ -136,3 +137,21 @@
     - e.offsetX, e.offsetY : 이벤트가 발생한 위치의 좌표
 3. Canvas
     - 선을 그리는 다양한 방법이 존재함. 예제는 해당 소스를 참조하여 확인하는 것이 나음
+
+
+#09-14 Must know dev tool tricks
+1. Chrome dev tool을 활용한 방법들 중 console.???()을 활용한 방법들을 기술함
+    - console.log()
+        -- console.log('Hello I am a %s string!', 'abcdef'); //format을 활용한 대체
+        -- console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue'); //스타일 적용도 가능, %c가 반드시 들어가야 한다.
+    - console.warn() : 경고시 활용
+    - console.error() : 흔히 오류가 나는 상황에 많이 접하는 메시지 형태.
+    - console.info() : log()보다 조금더 높은 수준의 log
+    - console.assert() : 첫번째 argument위치의 있는 값이 falsy이면 두번째 argument에 위치한 문자열이 error() 메소드 형태로 출력된다. 즉, 테스트 하는 것이라 보면 된다.
+    - console.clear() : console의 내용을 삭제한다.
+    - console > grouping
+        -- console.group(), console.groupCollapsed() : 그룹이 시작이 되는 지점을 뜻하며, 그룹이 끝나는 지점(gorupEnd())까지 그룹화한다. group()은 하위 노드의 모든 내용을 펼쳐서 보여주고, groupCollapsed()는 그룹화한 후 펼펴서 보여주지는 않는다.
+        -- console.groupEnd() : 그룹이 끝나는 위치
+    - console.count() : parameter로 전달하는 값이 일치하는 들이면 console.count()를 호출한만큼 카운팅한다.
+    - time(), timeEnd() : 시작 지점부터 끝지점까지 걸린 시간을 계산한다.
+    - console.table() : console에 표(테이블)의 형태로 값을 보여준다. 배열(array, list)의 값을 조회할때 유용하다.
