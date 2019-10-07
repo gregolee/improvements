@@ -155,3 +155,7 @@
     - console.count() : parameter로 전달하는 값이 일치하는 들이면 console.count()를 호출한만큼 카운팅한다.
     - time(), timeEnd() : 시작 지점부터 끝지점까지 걸린 시간을 계산한다.
     - console.table() : console에 표(테이블)의 형태로 값을 보여준다. 배열(array, list)의 값을 조회할때 유용하다.
+
+#10-Hold Shift and check checkboxes
+1. 범위를 지정할때 매우 유용한 생각이며, 단순하고 직관적인 코딩이 적혀 있다.
+    - 상세내용은 꼭 소스를 참조하는 것이 좋을것 같다.
