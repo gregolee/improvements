@@ -159,3 +159,14 @@
 #10-Hold Shift and check checkboxes
 1. 범위를 지정할때 매우 유용한 생각이며, 단순하고 직관적인 코딩이 적혀 있다.
     - 상세내용은 꼭 소스를 참조하는 것이 좋을것 같다.
+
+#11-CUSTOM HTML5 Video player
+1. Video와 관련된 eventListener 들이 있다.
+    - pause : 일시정지
+    - play : 재생
+    - timeupdate : 재생시간의 변경
+
+2. Video와 연관된 property가 있으니 참고한다.
+
+3. input
+    - range : 최소/최대/간격을 설정하는 것이 존재한다. 자주 활용할 수 있으니 알아두면 도움될 것 같다.
