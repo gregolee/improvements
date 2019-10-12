@@ -23,6 +23,7 @@ const sum = function(num1) {
 
 const sumArrow = (num1 => ((num2) => num1+num2));
 
+
 console.log(sum(1)(2));     // => 3
 console.log(sumArrow(1)(2));     // => 3
 
