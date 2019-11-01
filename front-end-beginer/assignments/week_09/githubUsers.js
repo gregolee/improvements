@@ -22,44 +22,44 @@ function executeAjax({method, url, successCallback, errorCallback}) {
     xhr.send();
 }
 
-function todoSuccessCallback(res) {
+function userSuccessCallback(res) {
     const jsonRes = JSON.parse(res);
-    const arrTodos = Array.from(jsonRes);
-    const htmlTodos = arrTodos.reduce((prevValue, todo) => prevValue 
-        + `<tr>
-                <td>${todo.id}</td>
-                <td>${todo.title}</td>
-                <td>${todo.completed}</td>
+    const htmlUsers = `<tr>
+                <td>${jsonRes.id}</td>
+                <td>${jsonRes.login}</td>
+                <td>${jsonRes.name}</td>
+                <td><img src="${jsonRes.avatar_url}" /></td>
+                <td>${jsonRes.bio}</td>
             </tr>
-            `, '');
+            `;
 
-    const eleTodos = document.querySelector('#todos');
-    eleTodos.innerHTML = htmlTodos;
+    const eleUsers = document.querySelector('#users');
+    eleUsers.innerHTML = htmlUsers;
 }
 
-function todoErrorCallback(res) {
+function userErrorCallback(res) {
     console.error(res);
     const html = `<tr><td colspan="3">${res}</td></tr>`;
     const eleTodos = document.querySelector('#todos');
     eleTodos.innerHTML = html;
 }
 
-function getTodos(userId) {
+function getUserInfo(username) {
     const param = {
         method: 'GET',
-        url: `https://jsonplaceholder.typicode.com/users/1/todos?userId=${userId}`,
-        successCallback: todoSuccessCallback,
-        errorCallback: todoErrorCallback
+        url: `https://api.github.com/users/${username}`,
+        successCallback: userSuccessCallback,
+        errorCallback: userErrorCallback
     };
     
     executeAjax(param);
 }
 
 window.onload = () => {
-    const eleUserId = document.querySelector('#userId');
-    eleUserId.addEventListener('keyup', (e) => {
+    const eleUsername = document.querySelector('#username');
+    eleUsername.addEventListener('keyup', (e) => {
         if(e.keyCode===13) {
-            getTodos(eleUserId.value);
+            getUserInfo(eleUsername.value);
         }
     });
 };
