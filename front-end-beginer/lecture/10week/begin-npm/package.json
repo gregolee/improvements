@@ -1,0 +1,23 @@
+{
+  "name": "begin-npm",
+  "version": "1.0.0",
+  "description": "node study make... mkdir folderName & cd folderName, npm init....",
+  "main": "index.js",
+  "script-description": "cmd에서 실행하면 global의 명령어로 접근하기 때문에 해당 프로젝트에 종속하는 내용을 확인하기 위해서는 이렇게 실행해야 한다.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "nvm": "0.0.4",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^1.18.2"
+  }
+}
